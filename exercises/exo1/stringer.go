@@ -1,8 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// Implement types Rectangle, Circle and Shape
+type Rectangle struct {
+	Width  float64
+	Length float64
+}
+
+func (r Rectangle) String() string {
+	return fmt.Sprint("Rectangle of width ", r.Width, " and lenght ", r.Length)
+}
+
+type Circle struct {
+	Radius float64
+}
+
+func (c Circle) String() string {
+	return fmt.Sprint("Circle of radius ", c.Radius)
+}
+
+type Shape interface {
+	String() string
+}
 
 func main() {
 	r := &Rectangle{2, 3}
@@ -12,8 +33,5 @@ func main() {
 
 	for _, s := range shapes {
 		fmt.Println(s)
-		// Expected output:
-		// Square of width 2 and length 3
-		// Circle of radius 5
 	}
 }

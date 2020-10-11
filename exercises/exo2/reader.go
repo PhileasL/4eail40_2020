@@ -16,6 +16,14 @@ func main() {
 	io.Copy(os.Stdout, &r)
 }
 
-// Implement a type that satisfies the io.Reader interface and reads from another io.Reader,
-// modifying the stream by removing the spaces.
-// Expected output: "Helloworld!"
+func (r spaceEraser) Read(p []byte) (int, error) {
+	n, err := r.r.Read(p)
+	index := 0
+	for i := 0; i < n; i++ {
+		if p[i] != 32 {
+			p[index] = p[i]
+			index++
+		}
+	}
+	return index, err
+}
