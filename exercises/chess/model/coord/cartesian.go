@@ -27,3 +27,27 @@ func (c Cartesian) Coord(n int) (int, error) {
 func (c Cartesian) String() string {
 	return fmt.Sprintf("%c%d", 65+c.y, c.x+1)
 }
+
+// Origin return (0,0) chessCoordinates
+func (c Cartesian) Origin() *Cartesian {
+	return &Cartesian{0, 0}
+}
+
+// UpRight return (0,0) chessCoordinates
+func (c Cartesian) UpRight() *Cartesian {
+	c.x++
+	c.y++
+	return &c
+}
+
+// Right return (0,0) chessCoordinates
+func (c Cartesian) Right() *Cartesian {
+	c.x++
+	return &c
+}
+
+// Left return (0,0) chessCoordinates
+func (c Cartesian) Left() *Cartesian {
+	c.x--
+	return &c
+}

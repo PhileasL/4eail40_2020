@@ -3,7 +3,8 @@ package board
 import (
 	"testing"
 
-	"github.com/jglouis/4eail40_2020/exercises/chess/model/coord"
+	"github.com/jglouis/4eail40_2020/exercises/chess/model/piece"
+	"github.com/jglouis/4eail40_2020/exercises/chess/model/player"
 )
 
 type mockCoord int
@@ -18,28 +19,35 @@ func (c mockCoord) String() string {
 }
 
 func TestClassic_MovePiece(t *testing.T) {
-	type args struct {
-		from coord.ChessCoordinates
-		to   coord.ChessCoordinates
+	board := NewBoardClassic()
+	pawn := piece.NewPawn(player.Black)
+	queen := piece.NewQueen(player.Black)
+
+	if err := board.PlacePieceAt(pawn, coord.Origin); err != nil {
+		t.Error(err)
 	}
-	tests := []struct {
-		name    string
-		c       *Classic
-		args    args
-		wantErr bool
-	}{
-		{
-			"testmock",
-			&Classic{},
-			args{mockCoord(0), mockCoord(1)},
-			true,
-		},
+
+	if err := board.PlacePieceAt(queen, coord.Right); err != nil {
+		t.Error(err)
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := tt.c.MovePiece(tt.args.from, tt.args.to); (err != nil) != tt.wantErr {
-				t.Errorf("Classic.MovePiece() error = %v, wantErr %v", err, tt.wantErr)
-			}
-		})
+
+	if err := board.MovePiece(coord.Origin, coord.Left); err != nil {
+		t.Error("expected an error while moving left")
+	}
+
+	if err := board.MovePiece(coord.Origin, coord.UpRight); err != nil {
+		t.Error(err)
+	}
+
+	if board.PieceAt(coord.UpRight) != pawn {
+		t.Error("Could not find the moved piece at destination coordinates")
+	}
+
+	if err := board.MovePiece(coord.Right, coord.UpRight); err != nil {
+		t.Error("expected the move to fail if destination was occupied")
+	}
+
+	if err := board.MovePiece(coord.Up, coord.UpRight); err != nil {
+		t.Error("expected the move to fail if no piece at the origin of the move")
 	}
 }

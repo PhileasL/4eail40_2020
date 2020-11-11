@@ -3,6 +3,7 @@ package board
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/jglouis/4eail40_2020/exercises/chess/model/coord"
 	"github.com/jglouis/4eail40_2020/exercises/chess/model/piece"
@@ -11,8 +12,25 @@ import (
 // Classic 8x8 Chess board
 type Classic [8][8]piece.Piece
 
+// NewBoardClassic create a new basic 8x8 empty chess Board
+func NewBoardClassic() *Classic {
+	return new(Classic)
+}
+
 func (c *Classic) String() string {
-	panic("not implemented") // TODO: Implement
+	var str strings.Builder
+	for y := 7; y >= 0; y-- {
+		for x := 0; x <= 7; x++ {
+			p := c[x][y]
+			if p == nil {
+				str.WriteString(" ")
+			} else {
+				str.WriteString(p.String())
+			}
+		}
+		str.WriteString("\n")
+	}
+	return str.String()
 }
 
 // PieceAt retrievves piece at give coordinates.

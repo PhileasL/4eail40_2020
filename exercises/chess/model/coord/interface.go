@@ -14,4 +14,9 @@ type ChessCoordinates interface {
 	// Vector
 	// Add()
 	// Multiply()
+
+	Origin() ChessCoordinates
+	UpRight() ChessCoordinates
+	Right() ChessCoordinates
+	Left() ChessCoordinates
 }

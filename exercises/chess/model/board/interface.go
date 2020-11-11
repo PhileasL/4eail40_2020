@@ -26,6 +26,8 @@ type Board interface {
 	IsCoordinateValid(c coord.ChessCoordinates) bool
 	// RemovePieceAt simply remove whetever there is at given coordinate
 	RemovePieceAt(c coord.ChessCoordinates)
+	// NewBoardClassic create an empty 8x8 Board
+	NewBoardClassic()
 }
 
 //  TODO exo : Implement a ClassicBuilder (don't forget the test(s)) !
