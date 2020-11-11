@@ -22,6 +22,10 @@ type Board interface {
 	// PlacePieceAt places a given piece at given location.
 	// Returns an error if destination was occupied.
 	PlacePieceAt(p piece.Piece, at coord.ChessCoordinates) error
+	// IsCoordinateValid a bool if the given coordinates is valid or not
+	IsCoordinateValid(c coord.ChessCoordinates) bool
+	// RemovePieceAt simply remove whetever there is at given coordinate
+	RemovePieceAt(c coord.ChessCoordinates)
 }
 
 //  TODO exo : Implement a ClassicBuilder (don't forget the test(s)) !
