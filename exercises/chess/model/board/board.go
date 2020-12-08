@@ -97,11 +97,11 @@ func (c *Classic) PlacePieceAt(p piece.Piece, at coord.ChessCoordinates) error {
 
 // IsCoordinateValid a bool if the given coordinates is valid or not.
 func (c *Classic) IsCoordinateValid(from coord.ChessCoordinates) bool {
-	coordCart, test := from.(*coord.Cartesian)
+	/*coordCart, test := from.(*coord.ChessCoordinates)
 	if !test {
 		return false
-	}
-	x, errx := coordCart.Coord(0)
-	y, erry := coordCart.Coord(1)
+	}*/
+	x, errx := from.Coord(0)
+	y, erry := from.Coord(1)
 	return errx == nil && erry == nil && x >= 0 && y >= 0 && x < 8 && y < 8
 }
