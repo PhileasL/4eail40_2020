@@ -51,3 +51,9 @@ func (c Cartesian) Left() *Cartesian {
 	c.x--
 	return &c
 }
+
+// Up return (0,0) chessCoordinates
+func (c Cartesian) Up() *Cartesian {
+	c.y++
+	return &c
+}
